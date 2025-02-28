@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册表单</title>
+    <style>
+        body {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .invisible-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .invisible-table td {
+            padding: 12px;
+            border: none;
+        }
+
+        .form-label {
+            font-size: 16px;
+            width: 35%;
+            vertical-align: top;
+            padding-top: 14px;
+        }
+
+        .form-field {
+            width: 65%;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: transparent;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            line-height: 2;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+            transform: translateY(2px);
+        }
+
+        #avatar-upload {
+            padding: 6px;
+            border: 1px dashed #ccc;
+        }
+
+        .submit-btn {
+            background: none;
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+            padding: 12px 40px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1><span style="font-size:28px;">用户注册</span></h1>
+
+    <form action="#" method="post" enctype="multipart/form-data">
+        <table class="invisible-table">
+            <!-- 用户名称 -->
+            <tr>
+                <td class="form-label">用户名称</td>
+                <td class="form-field">
+                    <input type="text" name="username" value="yezishan_1203">
+                </td>
+            </tr>
+
+            <!-- 用户密码 -->
+            <tr>
+                <td class="form-label">用户密码</td>
+                <td class="form-field">
+                    <input type="password" name="password" value="123456">
+                </td>
+            </tr>
+
+            <!-- 用户性别 -->
+            <tr>
+                <td class="form-label">用户性别</td>
+                <td class="form-field radio-group">
+                    <label>
+                        <input type="radio" name="gender" value="女" checked> 女
+                    </label>
+                    <label style="margin-left: 30px;">
+                        <input type="radio" name="gender" value="男"> 男
+                    </label>
+                </td>
+            </tr>
+
+            <!-- 爱好 -->
+            <tr>
+                <td class="form-label">爱好</td>
+                <td class="form-field checkbox-group">
+                    <label><input type="checkbox" name="hobby" value="足球"> 足球</label>
+                    <label><input type="checkbox" name="hobby" value="排球"> 排球</label>
+                    <label><input type="checkbox" name="hobby" value="LOL"> LOL</label><br>
+                    <label><input type="checkbox" name="hobby" value="韩剧"> 韩剧</label>
+                    <label><input type="checkbox" name="hobby" value="王者荣耀" checked> 王者荣耀</label>
+                </td>
+            </tr>
+
+            <!-- 邮箱 -->
+            <tr>
+                <td class="form-label">邮箱</td>
+                <td class="form-field">
+                    <input type="email" name="email" placeholder="请输入你的邮箱">
+                </td>
+            </tr>
+
+            <!-- 用户头像 -->
+            <tr>
+                <td class="form-label">用户头像</td>
+                <td class="form-field">
+                    <input type="file" name="avatar" id="avatar-upload" accept="image/*">
+                </td>
+            </tr>
+
+            <!-- 家庭住址 -->
+            <tr>
+                <td class="form-label">家庭住址</td>
+                <td class="form-field">
+                    <select name="address">
+                        <option value="河北省">河北省</option>
+                        <option value="山西省">山西省</option>
+                        <option value="辽宁省">辽宁省</option>
+                        <option value="吉林省">吉林省</option>
+                        <option value="黑龙江省">黑龙江省</option>
+                        <!-- 其他省份选项... -->
+                    </select>
+                </td>
+            </tr>
+
+            <!-- 提交按钮 -->
+            <tr>
+                <td colspan="2" style="text-align: center; padding-top: 30px;">
+                    <button type="submit" class="submit-btn">提交注册</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>
