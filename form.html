@@ -1,0 +1,108 @@
+<style type="text/css">
+    .form-table {
+        border: 3px solid #666;
+        border-collapse: collapse;
+        margin: 20px;
+    }
+
+    .form-table td,
+    .form-table th {
+        border: 2px solid #666;
+        padding: 15px;
+        vertical-align: middle;
+    }
+
+    input[type="text"],
+    select {
+        border: 1px solid #999;
+        padding: 5px;
+        margin-left: 10px;
+    }
+
+    .submit-btn {
+        font-family: comic sans ms, cursive;
+        font-size: 18px;
+        padding: 8px 25px;
+        border: 2px solid #666;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+</style>
+<table class="form-table">
+    <!-- 标题 -->
+    <tbody>
+        <tr>
+            <th colspan="2" style="font-family:comic sans ms,cursive; font-size:22px;">
+                Student Information Form</th>
+        </tr>
+        <!-- 学生ID -->
+        <tr>
+            <td style="width: 40%; font-family:comic sans ms,cursive; font-size:18px;">
+                Student Id</td>
+            <td>
+                <input name="id" style="font-family:comic sans ms,cursive; font-size:16px; width: 200px;" type="text"
+                    value="D24406040143" />
+            </td>
+        </tr>
+        <!-- 姓名 -->
+        <tr>
+            <td style="font-family:comic sans ms,cursive; font-size:18px;">
+                Name</td>
+            <td>
+                <input name="Name" style="font-family:comic sans ms,cursive; font-size:16px; width: 200px;" type="text"
+                    value="Marry Smith" />
+            </td>
+        </tr>
+        <!-- 性别 -->
+        <tr>
+            <td style="font-family:comic sans ms,cursive; font-size:18px;">
+                Gender</td>
+            <td style="font-family:comic sans ms,cursive; font-size:16px;">
+                <input name="gender" type="radio" /> Male &nbsp;&nbsp; <input name="gender" type="radio" /> Female
+            </td>
+        </tr>
+        <!-- 兴趣爱好 -->
+        <tr>
+            <td style="font-family:comic sans ms,cursive; font-size:18px;">
+                Habits</td>
+            <td style="font-family:comic sans ms,cursive; font-size:16px;">
+                <input name="swimming" type="checkbox" /> Swimming &nbsp; <input name="ping-pong" type="checkbox" />
+                Ping-pong &nbsp; <input name="guitar" type="checkbox" /> Guitar
+            </td>
+        </tr>
+        <!-- 专业 -->
+        <tr>
+            <td style="font-family:comic sans ms,cursive; font-size:18px;">
+                Major</td>
+            <td>
+                <select style="font-family:comic sans ms,cursive; font-size:16px; width: 150px;">
+                    <option value="math">math</option>
+                    <option value="music">music</option>
+                </select>
+            </td>
+        </tr>
+        <!-- 城市 -->
+        <tr>
+            <td style="font-family:comic sans ms,cursive; font-size:18px;">
+                City</td>
+            <td>
+                <input name="city" style="font-family:comic sans ms,cursive; font-size:16px; width: 200px;" type="text"
+                    value="ningbo" />
+            </td>
+        </tr>
+        <!-- 项目经验 -->
+        <tr>
+            <td style="font-family:comic sans ms,cursive; font-size:18px;">
+                Intem Experence</td>
+            <td>
+                <!-- 项目经验内容区域 -->
+            </td>
+        </tr>
+        <!-- 提交按钮 -->
+        <tr>
+            <td colspan="2" style="text-align: center; padding: 20px;">
+                <button class="submit-btn" type="submit">Submit Form</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
