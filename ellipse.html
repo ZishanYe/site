@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>简小丽 - 动态简历</title>
+    <style>
+        /* 椭圆动画 */
+        .ellipse {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            width: 200px;
+            height: 300px;
+            background: radial-gradient(circle, #0b72e7 0%, #9cd706 30%, transparent 70%);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.2);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        /* 简历容器 */
+        .resume {
+            position: relative;
+            width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        /* 基础简历样式 */
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .photo {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 椭圆动画 -->
+    <div class="ellipse"></div>
+
+    <!-- 简历内容 -->
+    <div class="resume">
+        <h1>简小丽 - 个人简历</h1>
+
+        <h2>基本信息</h2>
+        <p>姓名：简小丽</p>
+        <p>电话：135-0000-0000</p>
+
+        <h2>工作经历</h2>
+        <ul>
+            <li>社区服务站慢病管理员</li>
+            <li>药店店员（四年经验）</li>
+        </ul>
+
+        <h2>教育背景</h2>
+        <p>中专学历（药学专业）</p>
+
+        <h2>照片</h2>
+        <img src="简小丽.jpg" alt="证件照" class="photo">
+    </div>
+</body>
+
+</html>
