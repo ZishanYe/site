@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quadratic Equation Solver</title>
+</head>
+
+<body>
+    <script>
+        let a = parseFloat(prompt("Enter coefficient a:"));
+        let b = parseFloat(prompt("Enter coefficient b:"));
+        let c = parseFloat(prompt("Enter coefficient c:"));
+
+        const delta = b * b - 4 * a * c;
+
+        const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+        const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+
+        alert(`Solutions:\nx₁ = ${x1.toFixed(2)}\nx₂ = ${x2.toFixed(2)}`);
+        console.log(`Quadratic equation: ${a}x² + ${b}x + ${c} = 0`);
+        console.log(`Solutions: x₁ = ${x1}, x₂ = ${x2}`);
+    </script>
+</body>
+
+</html>
