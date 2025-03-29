@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Equation Solver</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #e67e22;
+            --error-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #f5f6fa;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .equation-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .coefficient-input {
+            width: 60px;
+            padding: 0.5rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .coefficient-input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        .solve-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .solve-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* 保留之前的解决方案卡片样式 */
+        .solution-card {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--secondary-color), #2980b9);
+        }
+
+        @media (max-width: 480px) {
+            .equation-input {
+                font-size: 1rem;
+            }
+
+            .coefficient-input {
+                width: 50px;
+                padding: 0.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 1.5rem;">
+            Quadratic Equation Solver
+        </h1>
+
+        <div class="equation-input">
+            <input type="number" id="a" class="coefficient-input" placeholder="a" step="any">
+            <span>x²</span>
+            <span>+</span>
+            <input type="number" id="b" class="coefficient-input" placeholder="b" step="any">
+            <span>x</span>
+            <span>+</span>
+            <input type="number" id="c" class="coefficient-input" placeholder="c" step="any">
+            <span>= 0</span>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="solve-btn" onclick="solveEquation()">Solve Equation</button>
+        </div>
+
+        <div id="equation-display" class="equation-display"
+            style="text-align: center; margin: 1.5rem 0; color: var(--primary-color);"></div>
+        <div id="error-message" class="error-message"></div>
+        <div id="solution-container" class="solution-card"></div>
+    </div>
+
+    <script>
+        function solveEquation() {
+            clearMessages();
+
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+
+            // 输入验证
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                showError('⚠️ 请输入有效的系数');
+                return;
+            }
+
+            // 动态更新方程显示
+            updateEquationDisplay(a, b, c);
+
+            // 原有解方程逻辑保持不变
+            const delta = b * b - 4 * a * c;
+            let solutions = [];
+
+            if (a === 0) {
+                handleLinearEquation(b, c);
+            } else {
+                handleQuadraticEquation(a, b, c, delta);
+            }
+        }
+
+        // 新增方程显示格式化函数
+        function formatTerm(value, symbol) {
+            if (value === 0) return '';
+            const absValue = Math.abs(value);
+            const sign = value > 0 ? '+' : '-';
+            const coefficient = absValue === 1 && symbol ? '' : absValue;
+
+            return `${sign} ${coefficient}${symbol}`;
+        }
+
+        function updateEquationDisplay(a, b, c) {
+            const equationDisplay = document.getElementById('equation-display');
+            let equation = '';
+
+            // 格式化各项
+            const aTerm = a !== 0 ? `${a === 1 ? '' : a}x²` : '';
+            const bTerm = formatTerm(b, 'x').replace(/^\+ /, '').replace(/^- /, '-');
+            const cTerm = formatTerm(c, '').replace(/^\+ /, '').replace(/^- /, '-');
+
+            equation = `${aTerm} ${bTerm} ${cTerm} = 0`
+                .replace(/\s+/g, ' ') // 去除多余空格
+                .replace(/^ /, '')    // 去除开头空格
+                .replace(/ $/, '');   // 去除结尾空格
+
+            // 处理特殊情形
+            if (equation === '= 0') equation = '0 = 0';
+            equationDisplay.innerHTML = `<strong>${equation}</strong>`;
+        }
+
+        // 保持之前的错误处理和显示逻辑
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.innerHTML = message;
+            errorDiv.style.display = 'block';
+            errorDiv.style.color = 'var(--error-color)';
+            errorDiv.style.padding = '1rem';
+            errorDiv.style.borderRadius = '6px';
+            errorDiv.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
+            errorDiv.style.margin = '1rem 0';
+        }
+
+        function clearMessages() {
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('solution-container').innerHTML = '';
+        }
+
+        // 保持之前的解方程逻辑
+        function handleLinearEquation(b, c) {
+            const solutions = [];
+            if (b === 0) {
+                c === 0 ? showError('∞ 无限解') : showError('❌ 无解');
+            } else {
+                solutions.push({ type: 'linear', value: -c / b });
+                displaySolutions(solutions);
+            }
+        }
+
+        function handleQuadraticEquation(a, b, c, delta) {
+            const solutions = [];
+            if (delta > 0) {
+                const sqrtDelta = Math.sqrt(delta);
+                solutions.push(
+                    { type: 'real', value: (-b + sqrtDelta) / (2 * a) },
+                    { type: 'real', value: (-b - sqrtDelta) / (2 * a) }
+                );
+            } else if (delta === 0) {
+                solutions.push({ type: 'repeated', value: -b / (2 * a) });
+            } else {
+                const realPart = (-b / (2 * a)).toFixed(2);
+                const imagPart = (Math.sqrt(-delta) / (2 * a)).toFixed(2);
+                solutions.push(
+                    { type: 'complex', real: realPart, imag: imagPart },
+                    { type: 'complex', real: realPart, imag: -imagPart }
+                );
+            }
+            displaySolutions(solutions);
+        }
+
+        function displaySolutions(solutions) {
+            const container = document.getElementById('solution-container');
+            container.innerHTML = `
+                <h3 style="color: var(--primary-color); margin-top: 0;">解</h3>
+                ${solutions.map((sol, index) => {
+                if (sol.type === 'linear') {
+                    return `<p>➜ 线性方程解: x = ${sol.value.toFixed(2)}</p>`;
+                }
+                if (sol.type === 'real') {
+                    return `<p>➜ x${index + 1} = ${sol.value.toFixed(2)}</p>`;
+                }
+                if (sol.type === 'repeated') {
+                    return `<p>➜ 重根: x = ${sol.value.toFixed(2)}</p>`;
+                }
+                if (sol.type === 'complex') {
+                    return `<p style="color: var(--warning-color);">➜ x${index + 1} = 
+                            ${sol.real} ± ${sol.imag}i
+                        </p>`;
+                }
+            }).join('')}
+            `;
+        }
+    </script>
+</body>
+
+</html>
