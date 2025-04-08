@@ -1,0 +1,104 @@
+function solve()
+{
+    const a = parseFloat(document.getElementById('a').value);
+    const b = parseFloat(document.getElementById('b').value);
+    const c = parseFloat(document.getElementById('c').value);
+    let err = '';
+    if (isNaN(a.value))
+    {
+        err = 'a is not a number.';
+        a.focus();
+        alert('please enter a number');
+    }
+    else if (isNaN(b.value))
+    {
+        err = 'b is not a number.';
+        b.focus();
+        alert('please enter a number');
+    }
+        else if (isNaN(c.value))
+    {
+        err = 'c is not a number.';
+        c.focus();
+        alert('please enter a number');
+    }
+    else
+    {
+        a = parseFloat(a.value);
+        b = parseFloat(b.value);
+        c = parseFloat(c.value);
+        if (a === 0)
+        {
+            if (b === 0)
+            {
+                if(c === 0)
+                {
+                    err = "any 'x' solves the question";
+                }
+                else
+                {
+                    err = "there is no solution";
+                }
+                else{
+                    err = 'x = '+ (-c/b);
+                }
+
+            }
+            else{
+                let delta = b**2 - 4*a*c;
+                if (delta > 0)
+                {
+
+                }
+            }
+        }
+    }
+}
+
+javascript objects
+similar to C's struct,python'dictionary,PHP associative array,jaca's map, 
+c++'s class/map/hashmap
+extension of array:
+array is a map from number -> value
+object: any --> any type
+key --> value
+object is a collecttion of key-value pairs
+
+syntax:
+let x = { };
+let y = {a:1, b:2.5, c:100}; //similar to CSS
+let z = {"a d":1, "bz":2.5, "c":100};
+the third one is the best
+attribute = field = key
+It's not necessary for all values to have the same type. Object can be inhomogeneous.
+
+varstudentrecord={
+    id:"D1233456",
+    name:"John Smith",
+    register:funtion(i,n)
+    {
+        studentrecord.id = i;
+        studentrecord.name = n;
+    }
+};
+studentrecord.register(1,"abc");
+
+studentrecord also can be viewed as a family name
+using family name is to promote software reusability
+by reducing the chance of name collision
+
+studentrecord.keys
+studentrecord.values
+studentrecord.entries
+
+for loop:
+for (let key in studentrecord) //iteration/traversal/go through
+{
+    console.log(studentrecord.key);
+    console.log(studentrecord[key]);
+}
+for (let value in studentrecord)
+{
+    console.log(value);
+}
+
