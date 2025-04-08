@@ -1,59 +1,42 @@
-function solve()
-{
-    const a = parseFloat(document.getElementById('a').value);
-    const b = parseFloat(document.getElementById('b').value);
-    const c = parseFloat(document.getElementById('c').value);
+function solve() {
+    let a = parseFloat(document.getElementById('a').value);
+    let b = parseFloat(document.getElementById('b').value);
+    let c = parseFloat(document.getElementById('c').value);
     let err = '';
-    if (isNaN(a.value))
-    {
-        err = 'a is not a number.';
-        a.focus();
-        alert('please enter a number');
-    }
-    else if (isNaN(b.value))
-    {
-        err = 'b is not a number.';
-        b.focus();
-        alert('please enter a number');
-    }
-        else if (isNaN(c.value))
-    {
-        err = 'c is not a number.';
-        c.focus();
-        alert('please enter a number');
-    }
-    else
-    {
-        a = parseFloat(a.value);
-        b = parseFloat(b.value);
-        c = parseFloat(c.value);
-        if (a === 0)
-        {
-            if (b === 0)
-            {
-                if(c === 0)
-                {
-                    err = "any 'x' solves the question";
-                }
-                else
-                {
-                    err = "there is no solution";
-                }
-                else{
-                    err = 'x = '+ (-c/b);
-                }
 
+    if (isNaN(a)) {
+        err = 'a 不是数字';
+        document.getElementById('a').focus();
+    } else if (isNaN(b)) {
+        err = 'b 不是数字';
+        document.getElementById('b').focus();
+    } else if (isNaN(c)) {
+        err = 'c 不是数字';
+        document.getElementById('c').focus();
+    } else {
+        if (a === 0) {
+            if (b === 0) {
+                err = c === 0 ? "所有实数都是解" : "无解";
+            } else {
+                err = `x = ${-c / b}`;
             }
-            else{
-                let delta = b**2 - 4*a*c;
-                if (delta > 0)
-                {
-
-                }
+        } else {
+            let delta = b ** 2 - 4 * a * c;
+            if (delta > 0) {
+                let x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                let x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                err = `两个实根：x₁ = ${x1.toFixed(2)}, x₂ = ${x2.toFixed(2)}`;
+            } else if (delta === 0) {
+                err = `唯一解：x = ${(-b / (2 * a)).toFixed(2)}`;
+            } else {
+                err = "无实根（有复数解）";
             }
         }
     }
+
+    alert(err || "计算结果将显示在这里");
 }
+
 
 javascript objects
 similar to C's struct,python'dictionary,PHP associative array,jaca's map, 
