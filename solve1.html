@@ -71,7 +71,6 @@
             transform: translateY(-2px);
         }
 
-        /* 保留之前的解决方案卡片样式 */
         .solution-card {
             margin-top: 2rem;
             padding: 1.5rem;
@@ -139,16 +138,13 @@
             const b = parseFloat(document.getElementById('b').value);
             const c = parseFloat(document.getElementById('c').value);
 
-            // 输入验证
             if (isNaN(a) || isNaN(b) || isNaN(c)) {
                 showError('⚠️ 请输入有效的系数');
                 return;
             }
 
-            // 动态更新方程显示
             updateEquationDisplay(a, b, c);
 
-            // 原有解方程逻辑保持不变
             const delta = b * b - 4 * a * c;
             let solutions = [];
 
@@ -159,7 +155,6 @@
             }
         }
 
-        // 新增方程显示格式化函数
         function formatTerm(value, symbol) {
             if (value === 0) return '';
             const absValue = Math.abs(value);
@@ -173,22 +168,19 @@
             const equationDisplay = document.getElementById('equation-display');
             let equation = '';
 
-            // 格式化各项
             const aTerm = a !== 0 ? `${a === 1 ? '' : a}x²` : '';
             const bTerm = formatTerm(b, 'x').replace(/^\+ /, '').replace(/^- /, '-');
             const cTerm = formatTerm(c, '').replace(/^\+ /, '').replace(/^- /, '-');
 
             equation = `${aTerm} ${bTerm} ${cTerm} = 0`
-                .replace(/\s+/g, ' ') // 去除多余空格
-                .replace(/^ /, '')    // 去除开头空格
-                .replace(/ $/, '');   // 去除结尾空格
+                .replace(/\s+/g, ' ')
+                .replace(/^ /, '')
+                .replace(/ $/, '');
 
-            // 处理特殊情形
             if (equation === '= 0') equation = '0 = 0';
             equationDisplay.innerHTML = `<strong>${equation}</strong>`;
         }
 
-        // 保持之前的错误处理和显示逻辑
         function showError(message) {
             const errorDiv = document.getElementById('error-message');
             errorDiv.innerHTML = message;
@@ -205,7 +197,6 @@
             document.getElementById('solution-container').innerHTML = '';
         }
 
-        // 保持之前的解方程逻辑
         function handleLinearEquation(b, c) {
             const solutions = [];
             if (b === 0) {
